@@ -2,6 +2,7 @@
  * Botfwk Demo Sift. Frontend controller entry point.
  */
 import { SiftController, registerSiftController } from '@redsift/sift-sdk-web';
+// import { SiftController, registerSiftController } from './sift-sdk-web/sdk';
 
 export default class MyController extends SiftController {
   constructor() {
@@ -12,6 +13,13 @@ export default class MyController extends SiftController {
 
   // for more info: http://docs.redsift.com/docs/client-code-siftcontroller
   loadView(state) {
+    debugger;
+
+    try {
+      throw new Error('');
+    } catch(err) {
+      console.log('[rpc-sift] loadView stack trace', err.stack);
+    }
     console.log('botfwk-sift: loadView', state);
     // Register for storage update events on the "x" bucket so we can update the UI
     // this.storage.subscribe(['x'], this._suHandler);

@@ -63,6 +63,8 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	
+	// import { SiftController, registerSiftController } from './sift-sdk-web/sdk';
+	
 	var MyController = function (_SiftController) {
 	  _inherits(MyController, _SiftController);
 	
@@ -80,6 +82,13 @@
 	  _createClass(MyController, [{
 	    key: 'loadView',
 	    value: function loadView(state) {
+	      debugger;
+	
+	      try {
+	        throw new Error('');
+	      } catch (err) {
+	        console.log('[rpc-sift] loadView stack trace', err.stack);
+	      }
 	      console.log('botfwk-sift: loadView', state);
 	      // Register for storage update events on the "x" bucket so we can update the UI
 	      // this.storage.subscribe(['x'], this._suHandler);
@@ -993,6 +1002,10 @@
 	process.removeListener = noop;
 	process.removeAllListeners = noop;
 	process.emit = noop;
+	process.prependListener = noop;
+	process.prependOnceListener = noop;
+	
+	process.listeners = function (name) { return [] }
 	
 	process.binding = function (name) {
 	    throw new Error('process.binding is not supported');
