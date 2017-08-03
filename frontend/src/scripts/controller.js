@@ -13,14 +13,25 @@ export default class MyController extends SiftController {
 
   // for more info: http://docs.redsift.com/docs/client-code-siftcontroller
   loadView(state) {
-    debugger;
-
-    try {
-      throw new Error('');
-    } catch(err) {
-      console.log('[rpc-sift] loadView stack trace', err.stack);
-    }
     console.log('botfwk-sift: loadView', state);
+
+    const authToken = `Bearer ${state.params.rpcJweToken.token}`;
+
+    console.log('botfwk-sift: authToken', authToken);
+
+    const oReq = new XMLHttpRequest();
+
+    oReq.addEventListener('load', () => {
+      console.log('RESPONSE:', oReq.response);
+    });
+    oReq.addEventListener('error', () => {
+      console.error('ERROR:', oReq.status);
+    });
+    oReq.setRequestHeader('Redsift-Account', state.params.userAccountId);
+    oReq.setRequestHeader('Authorization', authToken);
+    oReq.open('GET', 'https://rpc.redsift.io/domains', true);
+    oReq.send();
+ 
     // Register for storage update events on the "x" bucket so we can update the UI
     // this.storage.subscribe(['x'], this._suHandler);
     switch (state.type) {
