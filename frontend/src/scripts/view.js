@@ -37,7 +37,7 @@ export default class RPCSiftView extends SiftView {
   };
 
   async _getDataFromAPI({ repeatMe }) {
-    const { response } = await sendApiRequest({
+    const { response } = await this.sendApiRequest({
       apiToken: this._apiToken,
       userAccountId: this._userAccountId,
       method: 'POST',
