@@ -39,6 +39,7 @@ export default class RPCSiftView extends SiftView {
   };
 
   async _getDataFromAPI({ repeatMe }) {
+    console.log('_getDataFromAPI');
     const { response } = await this.sendApiRequest({
       apiToken: this._apiToken,
       userAccountId: this._userAccountId,
@@ -47,6 +48,7 @@ export default class RPCSiftView extends SiftView {
       data: repeatMe,
     });
 
+    console.log('RESPONSE before');
     return response;
   }
 
@@ -64,7 +66,11 @@ export default class RPCSiftView extends SiftView {
       const req = new XMLHttpRequest();
 
       req.addEventListener('load', () => {
-        resolve({ response: req.response });
+        console.log('ASDLFKJASDLKFJALKSDJFKLAJSDf', req.response, req.status);
+        resolve({
+          response: req.response,
+          status: req.status,
+        });
       });
 
       req.addEventListener('error', () => {
@@ -74,10 +80,10 @@ export default class RPCSiftView extends SiftView {
         });
       });
 
-      req.open(method, path, true);
+      req.open(method, `https://rpc.redsift.io${path}`, true);
 
       req.setRequestHeader('Redsift-Account', userAccountId);
-      req.setRequestHeader('Authorization', apiToken);
+      req.setRequestHeader('Authorization', `Bearer ${apiToken}`);
 
       headers.forEach((header) => {
         req.setRequestHeader(header.key, header.value);
