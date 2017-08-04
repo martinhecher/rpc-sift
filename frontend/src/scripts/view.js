@@ -15,8 +15,10 @@ export default class RPCSiftView extends SiftView {
   }
 
   // for more info: http://docs.redsift.com/docs/client-code-siftview
-  async presentView({ apiToken, userAccountId }) {
-    console.log('[rpc-sift|view] loadView | params:', { apiToken, userAccountId });
+  async presentView({ data }) {
+    console.log('[rpc-sift|view] loadView | data:', data);
+
+    const { apiToken, userAccountId } = data;
 
     this._apiToken = apiToken;
     this._userAccountId = userAccountId;
