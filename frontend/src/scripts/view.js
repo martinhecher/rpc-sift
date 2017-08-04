@@ -2,6 +2,8 @@
  * RPC Sift - A Sift demonstrating the Sift API access.
  */
 
+import 'babel-polyfill';
+
 import { SiftView, registerSiftView } from '@redsift/sift-sdk-web';
 
 export default class RPCSiftView extends SiftView {
