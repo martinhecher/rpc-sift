@@ -24,22 +24,21 @@ export default class RPCSiftView extends SiftView {
     this._userAccountId = userAccountId;
 
     try {
-      const { response } = await this._getDataFromAPI({
+      const response = await this._getDataFromAPI({
         repeatMe: 'A warm welcome from your Sift API!'
       });
 
       console.log('[rpc-sift] API response:', response);
 
-      document.getElementById('apiResult').innerHtml = response;
+      document.getElementById('apiResult').textContent = response;
     } catch(err) {
       console.error('[rpc-sift] API error:', err);
 
-      document.getElementById('apiResult').innerHtml = err.message;
+      document.getElementById('apiResult').textContent = err.message;
     }
   };
 
   async _getDataFromAPI({ repeatMe }) {
-    console.log('_getDataFromAPI');
     const { response } = await this.sendApiRequest({
       apiToken: this._apiToken,
       userAccountId: this._userAccountId,
@@ -48,7 +47,6 @@ export default class RPCSiftView extends SiftView {
       data: repeatMe,
     });
 
-    console.log('RESPONSE before');
     return response;
   }
 
@@ -66,7 +64,6 @@ export default class RPCSiftView extends SiftView {
       const req = new XMLHttpRequest();
 
       req.addEventListener('load', () => {
-        console.log('ASDLFKJASDLKFJALKSDJFKLAJSDf', req.response, req.status);
         resolve({
           response: req.response,
           status: req.status,
