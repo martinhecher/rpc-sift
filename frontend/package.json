@@ -1,6 +1,6 @@
 {
-  "name": "botfwk-sift",
-  "version": "0.0.1",
+  "name": "rpc-sift",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "build": "gulp build",
@@ -10,8 +10,9 @@
     "@redsift/ui-rs-core": "^0.8.3"
   },
   "devDependencies": {
+    "@redsift/redsift-bundler": "0.8.0",
     "@redsift/sift-sdk-web": "0.7.0",
-    "@redsift/redsift-bundler": "0.7.3",
+    "babel-polyfill": "^6.23.0",
     "gulp": "^3.9.1"
   }
 }

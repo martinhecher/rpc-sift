@@ -1,10 +1,8 @@
 {
   "name": "rpc-sift",
   "display-name": "RPC Demo Sift",
-  "description": "",
+  "description": "A Sift demonstrating the Sift API access",
   "author": "",
   "version": "1.0.0",
   "#": "Please use 'redsift npm' instead of system 'npm' ",
-  "dependencies": {
-  }
 }
