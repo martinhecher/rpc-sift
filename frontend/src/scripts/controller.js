@@ -19,6 +19,8 @@ export default class RPCSiftController extends SiftController {
       rpcApiConfig,
     };
 
+    console.log('[rpc - sift | view] loadView | data:', data);
+
     return {
       html: 'summary.html',
       data,
