@@ -13,7 +13,7 @@ export default class RPCSiftView extends SiftView {
     this._userAccountId = null;
     this._apiToken = null;
     this._apiBaseUrl = null;
-    this.userAccountIdHeaderName = null;
+    this._userAccountIdHeaderName = null;
   }
 
   // for more info: http://docs.redsift.com/docs/client-code-siftview
@@ -22,6 +22,8 @@ export default class RPCSiftView extends SiftView {
 
     const { userAccountId, rpcApiConfig } = data;
     const { apiToken, baseUrl, userAccountIdHeaderName } = rpcApiConfig;
+
+    console.log('[rpc - sift | view] loadView | rpcApiConfig:', rpcApiConfig);
 
     this._userAccountId = userAccountId;
     this._apiToken = apiToken;
@@ -69,6 +71,16 @@ export default class RPCSiftView extends SiftView {
     headers = [],
     contentType = 'application/json',
   }) {
+    console.log('asdf', userAccountId);
+    console.log('asdf', apiToken);
+    console.log('asdf', apiBaseUrl);
+    console.log('asdf', apiUserAccountIdHeader);
+    console.log('asdf', method);
+    console.log('asdf', path);
+    console.log('asdf', data);
+    console.log('asdf', headers);
+    console.log('asdf', contentType);
+
     return new Promise((resolve, reject) => {
       const req = new XMLHttpRequest();
 
