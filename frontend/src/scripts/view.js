@@ -10,18 +10,23 @@ export default class RPCSiftView extends SiftView {
   constructor() {
     super(); // initializes the SiftView base class
 
-    this._apiToken = null;
     this._userAccountId = null;
+    this._apiToken = null;
+    this._apiBaseUrl = null;
+    this.userAccountIdHeaderName = null;
   }
 
   // for more info: http://docs.redsift.com/docs/client-code-siftview
   async presentView({ data }) {
     console.log('[rpc-sift|view] loadView | data:', data);
 
-    const { apiToken, userAccountId } = data;
+    const { userAccountId, rpcApiConfig } = data;
+    const { apiToken, baseUrl, userAccountIdHeaderName } = rpcApiConfig;
 
-    this._apiToken = apiToken;
     this._userAccountId = userAccountId;
+    this._apiToken = apiToken;
+    this._apiBaseUrl = baseUrl;
+    this._userAccountIdHeaderName = userAccountIdHeaderName;
 
     try {
       const response = await this._getDataFromAPI({
@@ -40,8 +45,10 @@ export default class RPCSiftView extends SiftView {
 
   async _getDataFromAPI({ repeatMe }) {
     const { response } = await this.sendApiRequest({
-      apiToken: this._apiToken,
       userAccountId: this._userAccountId,
+      apiToken: this._apiToken,
+      apiBaseUrl: this._apiBaseUrl,
+      apiUserAccountIdHeader: this._userAccountIdHeaderName,
       method: 'POST',
       path: '/echo',
       data: repeatMe,
@@ -52,8 +59,10 @@ export default class RPCSiftView extends SiftView {
 
   // TODO: integrate into sift-sdk-web!
   sendApiRequest({
-    apiToken,
     userAccountId,
+    apiToken,
+    apiBaseUrl,
+    apiUserAccountIdHeader,
     method,
     path,
     data = null,
@@ -77,9 +86,9 @@ export default class RPCSiftView extends SiftView {
         });
       });
 
-      req.open(method, `https://rpc.redsift.io${path}`, true);
+      req.open(method, `${apiBaseUrl}${path}`, true);
 
-      req.setRequestHeader('Redsift-Account', userAccountId);
+      req.setRequestHeader(apiUserAccountIdHeader, userAccountId);
       req.setRequestHeader('Authorization', `Bearer ${apiToken}`);
 
       headers.forEach((header) => {
