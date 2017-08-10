@@ -3,7 +3,7 @@
   "display-name": " RPC Demo Sift",
   "description": "",
   "author": "",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "icon": "assets/blueprint.svg",
   "interfaces": {
     "summary": {
